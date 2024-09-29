@@ -4,7 +4,7 @@
 
 ```bash
 virtualenv .venv
-soruce .venv/Scripts/activate
-pip install -r requeriments.txt
+source .venv/Scripts/activate
+pip install -r requirements.txt
 python main.py
 ```
