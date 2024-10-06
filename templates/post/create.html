@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Crear un nuevo Post</h1>
+<form action="/post/create" method="post">
+    <div>
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title"
+                   placeholder="Post title" class=""
+                   value="{{ request.form.get('title', '') }}">
+    </div>
+    <div>
+        <label for="content">content</label>
+        <input type="text" id="content" name="content"
+                   placeholder="Post content" class=""
+                   value="{{ request.form.get('content', '') }}">
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
+{% endblock %}

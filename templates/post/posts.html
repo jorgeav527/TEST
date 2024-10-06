@@ -5,12 +5,13 @@
 <p>Algunos posts acontinuación:</p>
 
 {% if posts %}
-<table>
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>ID</th>
             <th>Título</th>
             <th>Contenido</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -19,6 +20,9 @@
             <td><a href="{{ url_for('get_one_post', post_id=post['id']) }}">{{ post['id'] }}</a></td>
             <td>{{ post['title'] }}</td>
             <td>{{ post['content'] }}</td>
+            <td>
+                <a href="http://" class="btn btn-warning btn-sm">Editar</a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
@@ -26,4 +30,5 @@
 {% else %}
 <p>No hay nada en la tabla.</p>
 {% endif %}
+<a href="{{ url_for('create_one_post')}}">Crear Nuevo Post</a>
 {% endblock %}
