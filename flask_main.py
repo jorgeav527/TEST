@@ -36,7 +36,7 @@ def create_one_post():
         title = request.form["title"]
         content = request.form["content"]
         conn = get_db_connection()
-        conn.execute('INSERT INTO posts (title, content) VALUES (?, ?)', (title, content))
+        conn.execute('INSERT INTO posts (title, content) VALUES (?, ?)', (title.upper(), content.upper()))
         conn.commit()
         conn.close()
         return redirect(url_for("get_all_post"))
