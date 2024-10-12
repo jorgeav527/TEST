@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask and WS</title>
+</head>
+<body>
+    <h1>WebSocket con Flask</h1>
+    <p>Mi sid: <span id="sid"></span></p>
+    <input
+        type="text"
+        id="messageInput"
+        placeholder="Escribe un mensaje..."
+    />
+    <button id="sendBtn">Enviar</button>
+    <ul id="messages"></ul>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        var socket = io.connect("http://localhost:5000");
+        socket.on("connect", function () {
+
+            console.log("Conectado al servidor WS")
+        });
+        socket.on("set_sid", function (data) {
+            clientSid = data.sid;
+            document.getElementById("sid").textContent = clientSid;
+            console.log("Mi SID:", clientSid);
+        });
+        document.getElementById("sendBtn").onclick = function () {
+            var input = document.getElementById("messageInput");
+            socket.send(input.value);
+            input.value = "";
+        };
+        socket.on("message", function (msg) {
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(msg));
+            document.getElementById("messages").appendChild(li);
+        });
+    </script>
+</body>
+</html>
